@@ -1,6 +1,6 @@
 const cheerio = require('cheerio');
 
-const parseFromSource = html => {
+const parsePriceFromSource = html => {
     const productDetails = { };
     const $ = cheerio.load(html);
 
@@ -16,8 +16,9 @@ const parseFromSource = html => {
         const cls = $(this).attr('class');
         if(cls && cls.includes('price') && !cls.includes('a-text-strike')) return this
     }).get();
-    if (priceFromClass) {
-        productDetails.price = $(priceFromClass).text();
+
+    if (priceFromClass.length) {
+        productDetails.price = $(priceFromClass[0]).text();
         return productDetails
     }
 
@@ -29,8 +30,8 @@ const parseFromSource = html => {
         }
     }).get();
 
-    if(priceFromIds) {
-        productDetails.price = $(priceFromIds).text();
+    if(priceFromIds.length) {
+        productDetails.price = $(priceFromIds[0]).text();
         return productDetails;
     }
 
@@ -38,5 +39,5 @@ const parseFromSource = html => {
 };
 
 module.exports = {
-    parseFromSource
+    parsePriceFromSource
 }

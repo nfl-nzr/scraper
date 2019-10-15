@@ -1,6 +1,6 @@
 const uriValidator = require('../utils/validators').uriValidator
 const pageSource = require('../helpers/api').getPageSource;
-const parser = require('../helpers/parser').parseFromSource;
+const parser = require('../helpers/parser').parsePriceFromSource;
 
 //Product url needs to be an the linkt to an amazon product.
 const scraper = async productUrl => {
